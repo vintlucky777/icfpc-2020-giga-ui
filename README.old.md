@@ -1,5 +1,13 @@
 # GIGA - Galactic Invasion Graphical Analyzer
 
+## Local server
+
+Run  locally with teh following commands:
+```shell
+$ yarn install
+$ yarn start
+```
+
 ## About
 
 Welcome to GIGA!

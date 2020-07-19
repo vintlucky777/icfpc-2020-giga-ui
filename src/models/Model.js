@@ -1,9 +1,9 @@
 import React, { Suspense, useRef, useEffect } from 'react'
 import { useLoader } from 'react-three-fiber'
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+import GLTFLoader from 'three-gltf-loader'
 
 export function ModelPlaceholder(props) {
-  // return <React.Fragment />
   return (
     <mesh>
       <boxGeometry attach="geometry" args={[1]} />
