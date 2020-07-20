@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import Pixel from 'src/components/SvgPixel'
 
 export function getLinePixels(x1, y1, x2, y2) {
