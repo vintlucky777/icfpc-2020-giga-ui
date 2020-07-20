@@ -9,11 +9,13 @@ const startGameState = {
   attacker: {
     position: [-36, -10],
     velocity: [0, 0],
+    thrust: [0, 0],
     stats: [100, 0, 0, 1],
   },
   defender: {
     position: [36, 10],
     velocity: [0, 0],
+    thrust: [0, 0],
     stats: [100, 0, 0, 1],
   },
   planetSize: 8,
@@ -21,7 +23,7 @@ const startGameState = {
 }
 
 export default function Home() {
-  const mode3D = true
+  const mode3D = false
   return (
     <div className="app">
       <Head>

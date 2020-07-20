@@ -38,7 +38,7 @@ function Battlefield3D({gameState}) {
         {/* Rotating coords for the scene. Y is ⬇, X is ➡ */}
         <group rotation={[Math.PI/2, 0, 0]} >
           {/* Planet */}
-          <Rectangle topLeft={[-8, -8]} bottomRight={[8, 8]} color={'#134'} />
+          <Rectangle topLeft={[-planetSize, -planetSize]} bottomRight={[planetSize, planetSize]} color={'#134'} />
 
           {/* Gravity Edges */}
           <PixelLine start={[-9, -9]} end={[-100, -100]} />
