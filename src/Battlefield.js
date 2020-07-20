@@ -9,7 +9,7 @@ import Attacker from 'src/components/Attacker2d'
 import LaserBeam from './components/LaserBeam'
 
 
-function Battlefield({gameState, setGameState}) {
+function Battlefield({gameState}) {
   const {attacker, defender, planetSize} = gameState
   // return (
   //   <SvgCanvas>

@@ -2,35 +2,22 @@ import React, { Suspense, useRef, useEffect } from 'react'
 import { useLoader } from 'react-three-fiber'
 // import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import GLTFLoader from 'three-gltf-loader'
+import { Box } from 'src/models/Primitives'
 
-export function ModelPlaceholder(props) {
+export function ModelPlaceholder({src, ...props}) {
   return (
-    <mesh>
-      <boxGeometry attach="geometry" args={[1]} />
-      <meshStandardMaterial
-        attach="material"
-        color="white"
-        transparent
-        roughness={1}
-        metalness={0}
-      />
-    </mesh>
+    <Box name={`placeholder ${src}`} size={1} {...props} />
   )
 }
 
 function ModelLoaded({ src, ...otherProps }) {
-  const ref = useRef()
   const model = useLoader(GLTFLoader, `${src}/scene.gltf`)
-  useEffect(() => {
-    ref.current.children.push(model.scene)
-  }, [ref])
   return (
-    <group ref={ref} {...otherProps} />
+    <primitive object={model.scene} rotation={[-Math.PI/2, 0, 0]} dispose={null} {...otherProps} />
   )
 }
 
 function Model(props) {
-  // return <ModelPlaceholder />
   return (
     <Suspense fallback={<ModelPlaceholder />}>
       <ModelLoaded {...props} />

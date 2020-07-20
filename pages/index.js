@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Head from 'next/head'
 import NoSSR from 'src/utils/NoSSR'
 import Battlefield from 'src/Battlefield'
+import Battlefield3D from 'src/Battlefield3D'
 import { BATTLEFIELD_SIZE as SIZE, PIXEL_SIZE } from 'src/constants'
 
 const startGameState = {
@@ -20,7 +21,7 @@ const startGameState = {
 }
 
 export default function Home() {
-  // const [gameState, setGameState] = useState(startGameState)
+  const mode3D = true
   return (
     <div className="app">
       <Head>
@@ -28,12 +29,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="battlefield_wrapper">
-        <NoSSR>
-          <Battlefield gameState={startGameState} />
-          {/* <Battlefield gameState={gameState} setGameState={setGameState}/> */}
-        </NoSSR>
-      </div>
+      {mode3D
+        ? (
+          <div className="battlefield3d_wrapper">
+            <Battlefield3D gameState={startGameState} />
+          </div>
+          )
+        : (
+          <div className="battlefield_wrapper">
+            <Battlefield gameState={startGameState} />
+          </div>
+          )
+      }
 
       <style jsx>{`
         .app {
@@ -46,6 +53,9 @@ export default function Home() {
           height: 100vh;
           min-height: ${(SIZE * 2) * PIXEL_SIZE}px;
           min-width: ${(SIZE * 2) * PIXEL_SIZE}px;
+        }
+        .battlefield3d_wrapper {
+          height: 100vh;
         }
       `}</style>
 
