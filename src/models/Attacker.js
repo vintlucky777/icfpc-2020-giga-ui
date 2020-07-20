@@ -1,6 +1,6 @@
 import React from 'react'
 import Model from 'src/models/Model'
-import Icon3D from 'src/components/Icon3D'
+import Icon from 'src/models/Icon'
 
 function Attacker({ position, velocity }) {
   const [x, y] = position
@@ -8,7 +8,8 @@ function Attacker({ position, velocity }) {
   const modelScale = 1
   return (
     <group name='attacker' position={[x, y, 0]}>
-      <Icon3D
+      <Icon
+        color='#f20'
         pattern={[
           'XX XX',
           'XXXXX',

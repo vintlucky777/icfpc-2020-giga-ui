@@ -27,6 +27,7 @@ function Battlefield({gameState}) {
       <Planet radius={planetSize} colorIndex={1} />
       <Attacker {...attacker} />
       <Defender {...defender} />
+      {/* Golden Beam */}
       <PixelLine
         color='gold'
         x1={defender.position[0]}
@@ -34,6 +35,7 @@ function Battlefield({gameState}) {
         x2={attacker.position[0]}
         y2={attacker.position[1]}
       />
+      {/* Some Symbol */}
       <PixelPath
         color='blue'
         points={[

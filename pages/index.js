@@ -55,7 +55,8 @@ export default function Home() {
           min-width: ${(SIZE * 2) * PIXEL_SIZE}px;
         }
         .battlefield3d_wrapper {
-          height: 100vh;
+          height: 100vw;
+          max-height: 100vh;
         }
       `}</style>
 

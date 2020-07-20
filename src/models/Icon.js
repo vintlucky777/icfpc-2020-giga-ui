@@ -1,7 +1,6 @@
 import React from 'react'
-import _ from 'lodash'
-import { Box } from 'src/models/Primitives'
-import {animated, useSpring} from 'react-spring'
+import { Pixel } from 'src/models/Primitives'
+
 
 const defaultPattern = [
   'XXXXX',
@@ -10,9 +9,7 @@ const defaultPattern = [
   'X   X',
   'XXXXX',
 ]
-
-
-export default function Icon3D({x=0, y=0, z=0, pattern=defaultPattern, color, colorIndex=0, ...otherProps}) {
+export default function Icon({pattern=defaultPattern, color, colorIndex=0, ...otherProps}) {
   const sizex = pattern[0].length
   const sizey = pattern.length
   if (!(sizex%2) || !(sizey%2)) {
@@ -22,7 +19,6 @@ export default function Icon3D({x=0, y=0, z=0, pattern=defaultPattern, color, co
   return (
     <group
       name='icon'
-      position={[x, y, z]}
       {...otherProps}
     >
     {_.flatten(
@@ -31,19 +27,11 @@ export default function Icon3D({x=0, y=0, z=0, pattern=defaultPattern, color, co
           const px = - (sizex-1)/2 + idx
           const py = - (sizey-1)/2 + idy
           return patternValue != ' '
-            ? <Box key={`${idx}_${idy}`} position={[px, py, 0]} colorIndex={colorIndex}/>
+            ? <Pixel key={`${idx}_${idy}`} position={[px, py, 0]} color={color} colorIndex={colorIndex}/>
             : null
         })
       ))
     )}
     </group>
-  )
-}
-
-let AnimIcon3D_ = animated(Icon3D)
-export const AnimIcon3D = ({x, y, ...props}) => {
-  const anim = useSpring({x, y})
-  return (
-    <AnimIcon3D_ x={anim.x} y={anim.y} {...props} />
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import Model from 'src/models/Model'
-import Icon3D from 'src/components/Icon3D'
+import Icon from 'src/models/Icon'
 
 function Defender({ position, velocity }) {
   const [x, y] = position
@@ -8,7 +8,8 @@ function Defender({ position, velocity }) {
   const modelScale = 0.006
   return (
     <group name='defender' position={[x, y, 0]}>
-    <Icon3D
+    <Icon
+      color={'aqua'}
       pattern={[
         '  X  ',
         ' XXX ',

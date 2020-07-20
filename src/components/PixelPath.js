@@ -2,8 +2,12 @@ import React from 'react'
 import _ from 'lodash'
 import PixelLine from 'src/components/PixelLine'
 
+export function getPathPoints(points) {
+  return _.zip(points.slice(0, -1), points.slice(1))
+}
+
 export default function PixelPath({points, color, colorIndex}) {
-  const pointPairs = _.zip(points.slice(0, -1), points.slice(1))
+  const pointPairs = getPathPoints(points)
   return (
     <g data-type='pixel-path'>
     {_.map(pointPairs, (pair, idx) => {

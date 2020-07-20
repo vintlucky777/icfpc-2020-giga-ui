@@ -6,7 +6,10 @@ import { TopDownCamera } from 'src/utils/Camera'
 
 import Defender from 'src/models/Defender'
 import Attacker from 'src/models/Attacker'
-import { Box } from 'src/models/Primitives'
+import { Pixel, PixelLine, PixelPath } from 'src/models/Primitives'
+// import Icon from 'src/models/Icon'
+import Rectangle from 'src/models/Rectangle'
+import BoundingBox from './models/BoundingBox'
 
 // WARNING: Work in Progress!
 
@@ -31,15 +34,49 @@ function Battlefield3D({gameState}) {
           far={10000}
         />
         <ApplyConfig config={initialConfig} />
+
         {/* Rotating coords for the scene. Y is ⬇, X is ➡ */}
         <group rotation={[Math.PI/2, 0, 0]} >
-          <Box position={[0, 0, 0]} />
+          {/* Planet */}
+          <Rectangle topLeft={[-8, -8]} bottomRight={[8, 8]} color={'#134'} />
+
+          {/* Gravity Edges */}
+          <PixelLine start={[-9, -9]} end={[-100, -100]} />
+          <PixelLine start={[-9,  9]} end={[-100,  100]} />
+          <PixelLine start={[ 9, -9]} end={[ 100, -100]} />
+          <PixelLine start={[ 9,  9]} end={[ 100,  100]} />
+
+          {/* Scene Edges */}
+          <BoundingBox width={201} height={201} />
+
+          {/* Some Symbol */}
+          <PixelPath
+            color='blue'
+            points={[
+              [0, 0],
+              [1, -1],
+              [2, 1],
+              [0, 2],
+              [-2, 1],
+              [-2, -1],
+              [0, -3],
+              [3, -4],
+            ]}
+          />
+          {/* Golden Beam */}
+          <PixelLine
+            color='gold'
+            start={defender.position}
+            end={attacker.position}
+          />
+
           <Defender {...defender} />
           <Attacker {...attacker} />
+
         </group>
 
-        <directionalLight intensity={2} />
-        <ambientLight intensity={0.5} />
+        <directionalLight intensity={1} />
+        <ambientLight intensity={0.75} />
       </Canvas>
     </NoSSR>
   )

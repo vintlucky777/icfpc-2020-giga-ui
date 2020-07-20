@@ -2,8 +2,8 @@ import React, { useRef, useEffect } from 'react'
 import { useThree, useFrame } from 'react-three-fiber'
 import { Vector3 } from 'three'
 
-const HEIGHT = 150
-const TILT_OFFSET = 100
+const HEIGHT = 350
+const TILT_OFFSET = 150
 const defaultPosition = new Vector3(0, HEIGHT, TILT_OFFSET)
 
 export function TopDownCamera({position, ...props}) {
@@ -18,6 +18,7 @@ export function TopDownCamera({position, ...props}) {
     setDefaultCamera(camera)
     camera.position.set(0, HEIGHT, TILT_OFFSET)
     camera.lookAt(0, 0, 0)
+    camera.setFocalLength(57)
   }, [])
   useEffect(() => {
     const camera = ref.current
