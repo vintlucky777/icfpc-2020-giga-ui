@@ -2,6 +2,9 @@ import React from 'react'
 import Model from 'src/models/Model'
 import Icon from 'src/models/Icon'
 
+// Original Model taken from public Sketchfab assets:
+// https://sketchfab.com/3d-models/raven-spaceship-star-conflict-v2-5edb70fdc0da4e6aa7d96f5f19f7a419
+
 function Defender({ position, velocity }) {
   const [x, y] = position
   const [vx, vy] = velocity
