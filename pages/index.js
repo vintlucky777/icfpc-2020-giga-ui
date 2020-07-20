@@ -23,7 +23,7 @@ const startGameState = {
 }
 
 export default function Home() {
-  const mode3D = false
+  const [mode3D, setMode3D] = useState(false)
   return (
     <div className="app">
       <Head>
@@ -44,9 +44,43 @@ export default function Home() {
           )
       }
 
-      <style jsx>{`
+      <div className='control_panel'>
+        <button
+          onClick={() => setMode3D(!mode3D)}
+        >
+          Switch to {mode3D ? '2D' : '3D'}
+        </button>
+      </div>
+
+
+      <style jsx global>{`
+        html,
+        body {
+          background-color: #222;
+          font-size: 16px;
+          padding: 0;
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
         .app {
           min-height: 100vh;
+        }
+        .control_panel {
+          position: fixed;
+          right: 1rem;
+          top: 1rem;
+          background: #33333388;
+          padding: 1em;
+          max-width: 16rem;
+          overflow-x: hidden;
+          overflow-y: auto;
         }
         .battlefield_wrapper {
           display: flex;
@@ -59,22 +93,6 @@ export default function Home() {
         .battlefield3d_wrapper {
           height: 100vw;
           max-height: 100vh;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          background-color: #222;
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
         }
       `}</style>
     </div>

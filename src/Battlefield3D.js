@@ -65,7 +65,7 @@ function Battlefield3D({gameState}) {
           />
           {/* Golden Beam */}
           <PixelLine
-            color='gold'
+            color='#f80'
             start={defender.position}
             end={attacker.position}
           />
@@ -76,7 +76,7 @@ function Battlefield3D({gameState}) {
         </group>
 
         <directionalLight intensity={1} />
-        <ambientLight intensity={0.75} />
+        <ambientLight intensity={0.5} />
       </Canvas>
     </NoSSR>
   )
