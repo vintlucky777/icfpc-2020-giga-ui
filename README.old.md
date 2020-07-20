@@ -6,6 +6,7 @@ Run  locally with teh following commands:
 ```shell
 $ yarn install
 $ yarn start
+$ open http://localhost:3000/
 ```
 
 ## About
