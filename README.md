@@ -11,6 +11,11 @@ $ yarn start
 $ open http://localhost:3000/
 ```
 
+The game state currently is defined in the `pages/index.js` file.
+While running local server in dev `yarn start` mode, you can change it and the UI will update.
+
+Work is in progress to allow for drag-n-drop log file parsing.
+
 ## About
 
 Welcome to GIGA!
@@ -27,3 +32,7 @@ focus group tests on certain types of animals. My dog approves it, and so should
 ## Company
 
 We are proud to be the company, that successfully implements the first commercial space flight... visualization. We hope you enjoy the view.
+
+# License
+
+A heavely languaged and very legal liguo license can be found somewhere in this repo.
