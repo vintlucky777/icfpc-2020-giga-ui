@@ -1,5 +1,7 @@
 # GIGA - Galactic Invasion Graphical Analyzer
 
+<img alt='GIGA Showcase' src='repo/giga-showcase.png' width='500'/>
+
 ## Local server
 
 Run  locally with teh following commands:
