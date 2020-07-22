@@ -14,7 +14,6 @@ import { Controls } from 'react-three-gui'
 
 // WARNING: Work in Progress!
 
-
 function initialConfig(THREE) {
   console.log('Initializing...')
   window.Battlefield3D = THREE
@@ -67,8 +66,8 @@ function Battlefield3D(props) {
             start={defender.position}
             end={attacker.position}
           />
-          <Defender {...defender} />
-          <Attacker {...attacker} />
+          <Defender {...defender} onClick={() => alert('This is Defender')}/>
+          <Attacker {...attacker} onClick={() => alert('This is Attacker')}/>
 
         </group>
 
@@ -79,7 +78,7 @@ function Battlefield3D(props) {
           intensity={2}
         />
       </Canvas>
-      <Controls />
+      {/* <Controls /> */}
     </React.Fragment>
   )
 }

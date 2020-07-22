@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pixel } from 'src/models/Primitives'
 
-export default function Rectangle({topLeft, bottomRight, color, colorIndex=0}) {
+export default function Rectangle({topLeft, bottomRight, color, colorIndex=0, ...props}) {
   const [xmin, ymin] = topLeft
   const [xmax, ymax] = bottomRight
   const pixels = _.flatten(
@@ -12,7 +12,7 @@ export default function Rectangle({topLeft, bottomRight, color, colorIndex=0}) {
     ))
   )
   return (
-    <group name='rectangle'>
+    <group name='rectangle' {...props}>
       {pixels}
     </group>
   )

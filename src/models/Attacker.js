@@ -9,7 +9,7 @@ import { a, useSpring } from 'react-spring/three'
 //
 // note: texture quality reduced to 2048 for memory efficiency
 
-function Attacker({ position, velocity }) {
+function Attacker({ position, velocity, ...props }) {
   const [x, y] = position
   const [vx, vy] = velocity
   const modelScale = 1.2
@@ -43,6 +43,7 @@ function Attacker({ position, velocity }) {
           src='/assets/models/attacker'
           position={[0, 0, -5]}
           scale={[modelScale, modelScale, modelScale]}
+          {...props}
         />
       </a.group>
     </React.Fragment>

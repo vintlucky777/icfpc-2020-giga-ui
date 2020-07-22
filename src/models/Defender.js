@@ -8,7 +8,7 @@ import { a, useSpring } from 'react-spring/three'
 // Original Model taken from public Sketchfab assets:
 // https://sketchfab.com/3d-models/raven-spaceship-star-conflict-v2-5edb70fdc0da4e6aa7d96f5f19f7a419
 
-function Defender({ position, velocity }) {
+function Defender({ position, velocity, ...props }) {
   const [x, y] = position
   const [vx, vy] = velocity
   const modelScale = 0.006
@@ -64,6 +64,7 @@ function Defender({ position, velocity }) {
           src='/assets/models/defender'
           position={[0, 0, -5]}
           scale={[modelScale, modelScale, modelScale]}
+          {...props}
         />
       </a.group>
     </React.Fragment>
