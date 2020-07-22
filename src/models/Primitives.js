@@ -3,10 +3,10 @@ import { getLinePixels } from 'src/components/PixelLine'
 import { getPathPoints } from 'src/components/PixelPath'
 import { a } from 'react-spring/three'
 
-export function Square({size=1, materialType='standard', color='white', ...props}) {
+export function Plane({width=1, height=1, materialType='standard', color='white', ...props}) {
   return (
     <a.mesh name='box' {...props}>
-      <planeGeometry attach='geometry' args={[size, size]} />
+      <planeGeometry attach='geometry' args={[width, height]} />
       {materialType == 'basic' && (
         <meshBasicMaterial
           attach='material'
@@ -65,7 +65,7 @@ export function Sphere({radius=1, segments=32, materialType='standard', color='w
 
 export function Pixel({position, color, colorIndex=0, ...props}) {
   const [x, y] = position
-  return <Square name='pixel' materialType='basic' position={[x, y, 0]} rotation-x={Math.PI} size={0.8} color={color} {...props} />
+  return <Plane name='pixel' materialType='basic' position={[x, y, 0]} rotation-x={Math.PI} width={0.8} height={0.8} color={color} {...props} />
 }
 
 
