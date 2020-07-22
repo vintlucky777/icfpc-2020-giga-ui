@@ -1,61 +1,41 @@
-import React, { useRef, useEffect } from 'react'
-import { useThree, useFrame } from 'react-three-fiber'
+import React, { useRef } from 'react'
+import { extend, useThree, useFrame } from 'react-three-fiber'
 import { Vector3 } from 'three'
-import { useControl } from 'react-three-gui'
-import { BATTLEFIELD_SIZE } from 'src/constants'
 import { a } from 'react-spring/three'
+import { OrbitControls, MapControls } from 'three/examples/jsm/controls/OrbitControls'
+import ApplyConfig from './ApplyConfig'
 
-const HEIGHT = 350
-const TILT_OFFSET = 150
-const defaultPosition = new Vector3(0, HEIGHT, TILT_OFFSET)
+const DEFAULT_POSITION = new Vector3(0, 350, 150)
 
-export function TopDownCamera({position=[0, 0], focusAt=null, focusPosition=null, ...props}) {
-  const { setDefaultCamera } = useThree()
-  const ref = useRef()
-  const cameraPosX = useControl('x', {
-    group: 'Camera Controls',
-    type: 'number',
-    spring: true,
-    scrub: true,
-    distance: BATTLEFIELD_SIZE / 2,
-    min: -BATTLEFIELD_SIZE / 2,
-    max: BATTLEFIELD_SIZE / 2,
-  })
-  const cameraPosY = useControl('y', {
-    group: 'Camera Controls',
-    type: 'number',
-    spring: true,
-    scrub: true,
-    distance: BATTLEFIELD_SIZE / 2,
-    min: -BATTLEFIELD_SIZE / 2,
-    max: BATTLEFIELD_SIZE / 2,
-  })
-  const zoom = useControl('zoom', {
-    group: 'Camera Controls',
-    type: 'number',
-    value: 1,
-    min: 1,
-    max: 7,
-    spring: true,
-  })
+extend({ OrbitControls, MapControls })
 
-  const [x, y] = position
+export function TopDownCamera({focusPosition=null, focusAt=null, ...props}) {
+  const { camera, gl: { domElement } } = useThree()
+  const controlsRef = useRef()
 
-  // Make the camera known to the system
-  useEffect(() => {
-    const camera = ref.current
-    setDefaultCamera(camera)
-    camera.position.set(0, HEIGHT, TILT_OFFSET)
+  const setupCamera = ({ camera }) => {
+    camera.position.copy(DEFAULT_POSITION)
     camera.lookAt(0, 0, 0)
     camera.setFocalLength(57)
-  }, [])
+    camera.setFocalLength(57)
+    camera.updateMatrixWorld()
+  }
+
+  // useEffect(() => {
+  //   const camera = cameraRef.current
+  //   setDefaultCamera(camera)
+  //   camera.position.set(0, HEIGHT, TILT_OFFSET)
+  //   camera.lookAt(0, 0, 0)
+  //   camera.setFocalLength(57)
+  // }, [])
   useFrame(() => {
-    ref.current.updateMatrixWorld()
+    controlsRef.current.update()
   })
-  const cameraZoomedPosition = zoom.interpolate(z => new Vector3().copy(defaultPosition).multiplyScalar(1/z))
   return (
-    <a.group position-x={cameraPosX} position-z={cameraPosY} name='top-down-camera'>
-      <a.perspectiveCamera ref={ref} position={cameraZoomedPosition} />
+    <a.group name='top-down-camera'>
+      {/* <a.perspectiveCamera ref={cameraRef} position={cameraZoomedPosition} /> */}
+      <ApplyConfig config={setupCamera} />
+      <mapControls ref={controlsRef} args={[camera, domElement]} />
     </a.group>
   )
 }
