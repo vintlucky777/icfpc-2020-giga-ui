@@ -1,15 +1,17 @@
 import React from 'react'
+import { gameState, getGameState } from 'src/galaxy'
 import SvgCanvas from 'src/components/SvgCanvas'
 
-import PixelLine from './components/PixelLine'
-import PixelPath from './components/PixelPath'
-import Planet from './components/Planet'
+import PixelLine from 'src/components/PixelLine'
+import PixelPath from 'src/components/PixelPath'
+import Planet from 'src/components/Planet'
 import Defender from 'src/components/Defender2d'
 import Attacker from 'src/components/Attacker2d'
-import LaserBeam from './components/LaserBeam'
+import LaserBeam from 'src/components/LaserBeam'
 
 
-function Battlefield({gameState}) {
+function Battlefield(props) {
+  // const gameState = getGameState()
   const {attacker, defender, planetSize} = gameState
   return (
     <SvgCanvas>

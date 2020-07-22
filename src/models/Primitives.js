@@ -1,39 +1,71 @@
 import React from 'react'
 import { getLinePixels } from 'src/components/PixelLine'
 import { getPathPoints } from 'src/components/PixelPath'
+import { a } from 'react-spring/three'
 
-export function Box({size=1, color='white', ...props}) {
+export function Square({size=1, materialType='standard', color='white', ...props}) {
   return (
-    <mesh name='box' {...props}>
+    <a.mesh name='box' {...props}>
+      <planeGeometry attach='geometry' args={[size, size]} />
+      {materialType == 'basic' && (
+        <meshBasicMaterial
+          attach='material'
+          color={color}
+        />
+      )}
+      {materialType == 'standard' && (
+        <meshStandardMaterial
+          attach='material'
+          color={color}
+        />
+      )}
+    </a.mesh>
+  )
+}
+export function Box({size=1, materialType='standard', color='white', ...props}) {
+  return (
+    <a.mesh name='box' {...props}>
       <boxGeometry attach='geometry' args={[size, size, size]} />
-      <meshStandardMaterial
-        attach='material'
-        color={color}
-        roughness={1}
-        metalness={0}
-      />
-    </mesh>
+      {materialType == 'basic' && (
+        <meshBasicMaterial
+          attach='material'
+          color={color}
+        />
+      )}
+      {materialType == 'standard' && (
+        <meshStandardMaterial
+          attach='material'
+          color={color}
+        />
+      )}
+    </a.mesh>
   )
 }
 
-export function Sphere({size=1, segments=32, color='white', ...props}) {
+export function Sphere({radius=1, segments=32, materialType='standard', color='white', ...props}) {
   return (
-    <mesh name='box' {...props}>
-      <boxGeometry attach='geometry' args={[size / 2, segments]} />
-      <meshStandardMaterial
-        attach='material'
-        color={color}
-        roughness={1}
-        metalness={0}
-      />
-    </mesh>
+    <a.mesh name='box' {...props}>
+      <sphereGeometry attach='geometry' args={[radius, segments, segments]} />
+      {materialType == 'basic' && (
+        <meshBasicMaterial
+          attach='material'
+          color={color}
+        />
+      )}
+      {materialType == 'standard' && (
+        <meshStandardMaterial
+          attach='material'
+          color={color}
+        />
+      )}
+    </a.mesh>
   )
 }
 
 
 export function Pixel({position, color, colorIndex=0}) {
   const [x, y] = position
-  return <Box name='pixel' position={[x, y, 0]} size={0.85} color={color} />
+  return <Square name='pixel' materialType='basic' position={[x, y, 0]} rotation-x={Math.PI} size={0.8} color={color} />
 }
 
 

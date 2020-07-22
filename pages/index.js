@@ -1,29 +1,18 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import NoSSR from 'src/utils/NoSSR'
-import Battlefield from 'src/Battlefield'
-import Battlefield3D from 'src/Battlefield3D'
+import dynamic, { noSSR } from 'next/dynamic'
+
+// import NoSSR from 'src/utils/NoSSR'
+// const Battlefield = NoSSR('src/Battlefield')
+// const Battlefield3D = NoSSR('src/Battlefield3D')
+
+const Battlefield = dynamic(() => import('src/Battlefield'), { ssr: false })
+const Battlefield3D = dynamic(() => import('src/Battlefield3D'), { ssr: false })
+
 import { BATTLEFIELD_SIZE as SIZE, PIXEL_SIZE } from 'src/constants'
 
-const startGameState = {
-  attacker: {
-    position: [-36, -10],
-    velocity: [0, 0],
-    thrust: [0, 0],
-    stats: [100, 0, 0, 1],
-  },
-  defender: {
-    position: [36, 10],
-    velocity: [0, 0],
-    thrust: [0, 0],
-    stats: [100, 0, 0, 1],
-  },
-  planetSize: 8,
-  rays: [],
-}
-
 export default function Home() {
-  const [mode3D, setMode3D] = useState(false)
+  const [mode3D, setMode3D] = useState(true)
   return (
     <div className="app">
       <Head>
@@ -34,12 +23,12 @@ export default function Home() {
       {mode3D
         ? (
           <div className="battlefield3d_wrapper">
-            <Battlefield3D gameState={startGameState} />
+            <Battlefield3D />
           </div>
           )
         : (
           <div className="battlefield_wrapper">
-            <Battlefield gameState={startGameState} />
+            <Battlefield />
           </div>
           )
       }

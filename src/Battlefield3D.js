@@ -1,15 +1,16 @@
 import React from 'react'
 import { Canvas } from 'react-three-fiber'
 import ApplyConfig from "src/utils/ApplyConfig"
-import NoSSR from "src/utils/NoSSR"
 import { TopDownCamera } from 'src/utils/Camera'
 
+import { gameState, getGameState } from 'src/galaxy'
 import Defender from 'src/models/Defender'
 import Attacker from 'src/models/Attacker'
 import { Pixel, PixelLine, PixelPath } from 'src/models/Primitives'
 // import Icon from 'src/models/Icon'
 import Rectangle from 'src/models/Rectangle'
-import BoundingBox from './models/BoundingBox'
+import BoundingBox from 'src/models/BoundingBox'
+import { Controls } from 'react-three-gui'
 
 // WARNING: Work in Progress!
 
@@ -20,23 +21,20 @@ function initialConfig(THREE) {
   console.log('done!')
 }
 
-function Battlefield3D({gameState}) {
+function Battlefield3D(props) {
+  // const gameState = getGameState()
   const {attacker, defender, planetSize} = gameState
 
   return (
-    <NoSSR>
+    <React.Fragment>
       <Canvas
         style={{ background: "#171717", width: '100%', height: '100%' }}
       >
-        <TopDownCamera
-          position={[0, 0]}
-          near={10}
-          far={10000}
-        />
         <ApplyConfig config={initialConfig} />
+        <TopDownCamera />
 
         {/* Rotating coords for the scene. Y is ⬇, X is ➡ */}
-        <group rotation={[Math.PI/2, 0, 0]} >
+        <group name='battlescene' rotation={[Math.PI/2, 0, 0]} >
           {/* Planet */}
           <Rectangle topLeft={[-planetSize, -planetSize]} bottomRight={[planetSize, planetSize]} color={'#134'} />
 
@@ -69,16 +67,20 @@ function Battlefield3D({gameState}) {
             start={defender.position}
             end={attacker.position}
           />
-
           <Defender {...defender} />
           <Attacker {...attacker} />
 
         </group>
 
-        <directionalLight intensity={1} />
-        <ambientLight intensity={0.5} />
+        <directionalLight intensity={2} />
+        <hemisphereLight
+          color={'#000'}
+          groundColor={'#6853d1'}
+          intensity={2}
+        />
       </Canvas>
-    </NoSSR>
+      <Controls />
+    </React.Fragment>
   )
 }
 
